@@ -2,6 +2,7 @@ var KnockoutDocs = Base.extend({
     constructor: function(){
         this.items = ko.observableArray();
         this.selectedItem = ko.observable();
+        
         this.addItem = this.addItem.bind(this);
         this.editItem = this.editItem.bind(this);
     },

@@ -1,0 +1,14 @@
+.document.selected {
+    background-color: yellow;
+}
+
+.spreadsheet
+{
+    overflow: auto;
+}
+
+.spreadsheet td{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}

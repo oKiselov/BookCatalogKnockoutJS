@@ -6,6 +6,7 @@
         <script type="text/javascript" src="Scripts/libs/knockout-3.4.2.debug.js"></script>
         <script type="text/javascript" src="Scripts/libs/bootstrap.js"></script>
         <script type="text/javascript" src="Scripts/libs/Base.js"></script>
+        <script type="text/javascript" src="Scripts/libs/lodash.js"></script>
         <script type="text/javascript" src="Scripts/main.js"></script>
         <script type="text/javascript" src="Scripts/document.js"></script>
         <script type="text/javascript" src="Scripts/knockout_docs.js"></script>
@@ -26,7 +27,7 @@
             <div class="row">
                 <div class="span4">
                     <div class="dropdown">
-                        <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#"Create...></a>
+                        <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">Create...</a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li><a tabindex="-1" href="#" data-bind="click: createDocument">Document</a></li>                            
                             <li><a tabindex="-1" href="#" data-bind="click: createSpreadsheet">Spreadsheet</a></li>
@@ -79,6 +80,45 @@
                     </tr>
                 </tbody>
             </table>
+        </script>
+
+        <script id="spreadsheet-template" type="text/html">
+            <h2>Title:
+                <input class="input-xxlarge" type="text" data-bind="value: title" />
+            </h2>
+            <table class="spreadsheet">
+                    <thead>
+                        <tr>
+                            <th>
+                                <!--Empty corner header-->
+                            </th>
+                            <!-- ko foreach: columnNames -->
+                            <th data-bind="text: $data"></th>
+                            <!-- /ko -->
+                            <th>
+                                <button class="btn" data-bind="click: addColumn">Add Column</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko foreach: {data: rows, as: 'row'} -->
+                        <tr>
+                            <td data-bind="text: $index() + 1"></td>
+                            <!-- ko foreach: {data: row.cells, as: 'cell'} -->
+                            <td>
+                                <input type="text" data-bind="value: cell.value" />
+                            </td>
+                            <!-- /ko -->
+                            <td></td>
+                        </tr>
+                        <!-- /ko -->
+                        <tr>
+                            <td>
+                                <button class="btn" data-bind="click: addRow">Add Row</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
         </script>
     </body>
     </html>    

@@ -7,24 +7,53 @@ var Spreadsheet = Base.extend({
 
         this.rows = ko.observableArray();
 
+        this.columnNames = ko.computed(this._getColumnNames, this);
+        this.addRow = this.addRow.bind(this);
+        this.addColumn = this.addColumn.bind(this);
+
         this.init();
     },
     init: function(){
-        var row;
-        var cell;
         var rowIndex;
-        var colIndex;
-
         for(rowIndex = 0; rowIndex < this.numRows(); rowIndex++){
-            row = {cells: ko.observableArray()};
-
-            for(colIndex = 0; colIndex < this.numCols(); colIndex++){
-                cell = {value: ko.observable()};
-                row.cells.push(cell);
-            }
-            this.rows.push(row);
+            this.addRow();
         }
+    },
+    addRow: function(){
+        var row = new Spreadsheet.Row();
+        var cell;
+        for(var i = 0; i< this.numCols(); i++){
+            cell = new Spreadsheet.Cell();
+            row.cells.push(cell);
+        }
+        this.rows.push(row);
+    },
+    addColumn: function(){
+        var cell;
+        _.each(this.rows(), function(row){
+            cell = new Spreadsheet.Cell();
+            row.cells.push(vell);
+        });
+        this.numCols(this.numCols() + 1);
+    },
+    _getColumnNames: function(){
+        var letters = [];
+        var ACharCode = 'A'.charCodeAt(0);
+        for(var i = ACharCode; i<ACharCode + this.numCols(); i++){
+            letters.push(String.fromCharCode(i));
+        }
+        return letters;
     }
-
+}, {
+Row: Base.extend({
+    constructor: function(){
+        this.cells = ko.observableArray();
+    }
+}),
+Cell: Base.extend({
+    constructor: function(){
+        this.value = ko.observable();
+    }
+})
 
 });

@@ -32,7 +32,7 @@ var Spreadsheet = Base.extend({
         var cell;
         _.each(this.rows(), function(row){
             cell = new Spreadsheet.Cell();
-            row.cells.push(vell);
+            row.cells.push(cell);
         });
         this.numCols(this.numCols() + 1);
     },

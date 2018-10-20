@@ -41,7 +41,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="span8">
+                <div class="span8" data-bind="if: selectedItem">
                     <div class="dropdown well" data-bind="template: { name: selectedItem().templateName, data: selectedItem }">
                     </div>
                 </div>
@@ -65,21 +65,6 @@
                 <h3>Body:</h3>
                 <textarea class="input-block-level" data-bind="value: body"></textarea>
             </div>
-        </script>
-
-        <script id="spreadsheet-template" type="text/html">
-            <h2>Title:
-                <input class="input-xxlarge" type="text" data-bind="value: title" />
-            </h2>
-            <table class="spreadsheet">
-                <tbody data-bind="foreach: rows">
-                    <tr data-bind="foreach: cells">
-                        <td>
-                            <input type="text" data-bind="value: value"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </script>
 
         <script id="spreadsheet-template" type="text/html">

@@ -11,6 +11,7 @@
         <script type="text/javascript" src="Scripts/document.js"></script>
         <script type="text/javascript" src="Scripts/knockout_docs.js"></script>
         <script type="text/javascript" src="Scripts/spreadsheet.js"></script>
+        <script type="text/javascript" src="Scripts/filter.js"></script>
 
         <link type="text/css" rel="stylesheet" href="Styles/bootstrap.css"/>
         <link type="text/css" rel="stylesheet" href="Styles/Site.css"/>
@@ -34,7 +35,13 @@
                         </ul>
                     </div>
 
-                    <ul class="unstyled dropdown well" data-bind="foreach: items">
+                    <div class="well well-small" data-bind="with: filter">
+                        <label><input type="checkbox" data-bind="checked: showDocuments"/>Documents</label>
+                        <label><input type="checkbox" data-bind="checked: showSpreadsheets"/>Spreadsheets</label>
+                        <label>Search:<input type="text" data-bind="value: textFilter, valueUpdate: 'afterkeydown'"/></label>
+                    </div>
+
+                    <ul class="unstyled dropdown well" data-bind="foreach: filteredItems">
                         <li class="document">
                             <i class="icon-file"></i>
                             <a href="#" data-bind="text: title, click: $parent.editItem"></a>

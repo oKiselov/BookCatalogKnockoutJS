@@ -19,6 +19,22 @@ var Spreadsheet = Base.extend({
             this.addRow();
         }
     },
+    matchesTextFilter: function (textFilter) {
+        var title = this.title() || '';
+        var titleMatches = title.toLowerCase().indexOf(textFilter.toLowerCase()) != -1;
+
+        return titleMatches || this._anyCellMatchesTextFilter(textFilter);
+    },
+    _anyCellMatchesTextFilter: function (textFilter) {
+        var anyRowMatches = _.any(this.rows(), function (row) {
+            var anyCellMatches = _.any(row.cells(), function (cell) {
+                var cellValue = cell.value() || '';
+                return cellValue.toLowerCase().indexOf(textFilter.toLowerCase()) != -1;
+            });
+            return anyCellMatches;
+        });
+        return anyRowMatches;
+    },
     addRow: function(){
         var row = new Spreadsheet.Row();
         var cell;

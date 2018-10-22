@@ -1,0 +1,36 @@
+{
+  "Catalog": [
+    {
+      "ISBN": "978-1-78398-084-0",
+      "Title": "KnockoutJS Blueprints",
+      "Authors": [ 1 ],
+      "AmountOfPages": 218,
+      "Rate": 8,
+      "Date": 2015
+    },
+    {
+      "ISBN": "978-1-491-91431-1",
+      "Title": "Knockout.js. Building Dynamic Client-Side Web Applications",
+      "Authors": [ 2 ],
+      "AmountOfPages": 101,
+      "Rate": 7,
+      "Date": 2014
+    },
+    {
+      "ISBN": "978-1-78216-102-8",
+      "Title": "Efficiently work with data, web templates, and custom HTML tags using KnockoutJS",
+      "Authors": [ 3 ],
+      "AmountOfPages": 178,
+      "Rate": 7,
+      "Date": 2015
+    },
+    {
+      "ISBN": "978-1-78216-102-8",
+      "Title": "Implement a successful JavaScript-rich application with KnockoutJS, jQuery, and Bootstrap",
+      "Authors": [ 3, 4 ],
+      "AmountOfPages": 232,
+      "Rate": 9,
+      "Date": 2015
+    }
+  ]
+}

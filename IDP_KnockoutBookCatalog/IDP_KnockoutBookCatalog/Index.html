@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>KnockoutJS BookCatalog</title>
+    <link href="Content/Site.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/knockout-3.4.2.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Models/Author.js"></script>
+    <script src="DataProvider/DataContext.js"></script>
+    <script src="ViewModels/DefaultViewModel.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Welcome to the KnockoutJS Book Catalog</h1>
+            <p>Here you can edit information about books and authors</p>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Id</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: authors">
+                <tr>
+                    <td width="5%">
+                        <button type="button" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </td>
+                    <td width="10%" data-bind="text: Id"></td>
+                    <td width="40%"><input type="text" data-bind="textInput: LastName" /></td>
+                    <td width="40%"><input type="text" data-bind="textInput: FirstName" /></td>
+                    <td width="5%"><button class="btn btn-success full-button">Save</button></td>
+                </tr>
+                <!-- ko if: Id() > 2 -->
+                <tr>
+                    <td colspan="4">
+                        <div>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            ko.applyBindings(app.DefaultViewModel);
+        });
+    </script>
+</body>
+</html>

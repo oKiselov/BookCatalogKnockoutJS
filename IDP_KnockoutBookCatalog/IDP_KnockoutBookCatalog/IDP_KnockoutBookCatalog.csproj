@@ -157,7 +157,9 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Models\Author.js" />
     <Content Include="Models\Book.js" />
+    <Content Include="Templates\book_template.html" />
     <Content Include="ViewModels\DefaultViewModel.js" />
+    <Content Include="ViewModels\TemplateViewModel.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />

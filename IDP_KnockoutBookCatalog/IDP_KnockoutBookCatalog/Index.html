@@ -9,7 +9,9 @@
     <script src="Scripts/knockout-3.4.2.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="Models/Author.js"></script>
+    <script src="Models/Book.js"></script>
     <script src="DataProvider/DataContext.js"></script>
+    <script src="ViewModels/TemplateViewModel.js"></script>
     <script src="ViewModels/DefaultViewModel.js"></script>
 </head>
 <body>
@@ -32,7 +34,7 @@
             <tbody data-bind="foreach: authors">
                 <tr>
                     <td width="5%">
-                        <button type="button" class="btn btn-success">
+                        <button type="button" class="btn btn-success" data-bind="click: $root.setExpandedAuthors">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </td>
@@ -41,13 +43,12 @@
                     <td width="40%"><input type="text" data-bind="textInput: FirstName" /></td>
                     <td width="5%"><button class="btn btn-success full-button">Save</button></td>
                 </tr>
-                <!-- ko if: Id() > 2 -->
+                <!-- ko if: IsExpanded() -->
                 <tr>
-                    <td colspan="4">
+                    <td colspan="5">
                         <div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            <!-- ko template: {name:'expanded-authors-book-table', data: BooksCatalog, as: 'expandedAuthorBookCatalog' }-->
+                            <!-- /ko -->
                         </div>
                     </td>
                 </tr>
@@ -57,7 +58,9 @@
     </div>
     <script>
         $(document).ready(function () {
-            ko.applyBindings(app.DefaultViewModel);
+            app.TemplateViewModel.loadTemplates(function () {
+                ko.applyBindings(app.DefaultViewModel);
+            });
         });
     </script>
 </body>

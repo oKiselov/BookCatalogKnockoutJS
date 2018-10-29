@@ -1,0 +1,24 @@
+﻿<script id="expanded-authors-book-table" type="text/html">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Pages</th>
+                    <th>Rate</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: expandedAuthorBookCatalog">
+                <tr>
+                    <td><input type="text" data-bind="textInput: Title"/></td>
+                    <td><input type="text" data-bind="AmountOfPages"/></td>
+                    <td><input type="text" data-bind="Rate"/></td>
+                    <td><input type="text" data-bind="Date"/></td>
+                    <td><button class="btn btn-warning">Save</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</script>

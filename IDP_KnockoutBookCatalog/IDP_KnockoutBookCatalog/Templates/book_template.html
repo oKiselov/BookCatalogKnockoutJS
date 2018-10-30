@@ -1,6 +1,6 @@
 ﻿<script id="expanded-authors-book-table" type="text/html">
     <div>
-        <table>
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -13,9 +13,9 @@
             <tbody data-bind="foreach: expandedAuthorBookCatalog">
                 <tr>
                     <td><input type="text" data-bind="textInput: Title"/></td>
-                    <td><input type="text" data-bind="AmountOfPages"/></td>
-                    <td><input type="text" data-bind="Rate"/></td>
-                    <td><input type="text" data-bind="Date"/></td>
+                    <td><input type="text" data-bind="textInput: AmountOfPages"/></td>
+                    <td><input type="text" data-bind="textInput: Rate"/></td>
+                    <td><input type="text" data-bind="textInput: Date"/></td>
                     <td><button class="btn btn-warning">Save</button></td>
                 </tr>
             </tbody>

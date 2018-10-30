@@ -24,13 +24,15 @@ app.DefaultViewModel = (function (ko, db) {
         db.getBooks(function (data) {
             var tempBooks = [];
             ko.utils.arrayForEach(data || [], function (item) {
-                tempBooks.push(new app.Book(item.ISBN, item.Title, item.Pages, item.Date, item.Authors));
-                var arrayAuthors = item.Authors.split(',').map(Number);
-                if ($.isArray(arrayAuthors) && $.isArray(me.authors())) {
+
+                var newBook = new app.Book(item.ISBN, item.Title, item.AmountOfPages, item.Rate, item.Date, item.Authors);
+                tempBooks.push(newBook);
+
+                if ($.isArray(newBook.Authors()) && $.isArray(me.authors())) {
                     ko.utils.arrayForEach(me.authors() || [], function (author) {
-                        ko.utils.arrayForEach(arrayAuthors || [], function (element) {
-                            if (element.Id === author.Id) {
-                                author.BooksCatalog.push(new app.Book(item.ISBN, item.Title, item.Pages, item.Date));
+                        ko.utils.arrayForEach(newBook.Authors() || [], function (element) {
+                            if (element === author.Id()) {
+                                author.BooksCatalog.push(newBook);
                             }
                         });
                     });

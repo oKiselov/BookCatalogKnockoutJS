@@ -5,11 +5,20 @@ app.DataContext = (function () {
         getBooks: getBooks,
         saveBooks: saveBooks,
         getAuthors: getAuthors,
-        saveAuthors: saveAuthors
+        saveAuthor: saveAuthor
     };
 
     var booksCatalog = "booksCatalog";
     var authorsCatalog = "authorsCatalog";
+
+    function getBooks(callback) {
+        getCatalogFromStorage(callback, booksCatalog, '../Data/Books.json');
+    }
+
+    function getAuthors(callback) {
+        getCatalogFromStorage(callback, authorsCatalog, '../Data/Authors.json');
+    }
+
 
     function getCatalogFromStorage(callback, localStorageId, path) {
         var catalog = null;
@@ -26,44 +35,57 @@ app.DataContext = (function () {
         }
     }
 
-    function getBooks(callback) {
-        getCatalogFromStorage(callback, booksCatalog, '../Data/Books.json');
-    }
-
-    function getAuthors(callback) {
-        getCatalogFromStorage(callback, authorsCatalog, '../Data/Authors.json');
-    }
-
-    function saveAuthors(authorsArray) {
+    function saveAuthor(author) {
+        var catalog = localStorage[authorsCatalog],
+            existedData = [],
+            exists = false,
+            i = 0;
+        if (catalog) {
+            existedData = JSON.parse(catalog);
+            if ($.isArray(existedData)) {
+                for (i = 0; i < existedData.length; i++) {
+                    if (existedData[i].Id === author.Id) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    existedData.push(author);
+                } else if (exists) {
+                    existedData[i].FirstName = author.FirstName;
+                    existedData[i].LastName = author.LastName;
+                }
+            }
+            localStorage[authorsCatalog] = JSON.stringify(existedData);
+        }
     }
 
     function saveBooks(booksArray) {
         var catalog = localStorage[booksCatalog],
-            updatedData = [],
+            existedData = [],
             exists = false,
-            i = 0,
-            l = 0;
+            i = 0;
         if (catalog) {
-            updatedData = JSON.parse(catalog);
-            if ($.isArray(updatedData) && $.isArray(booksArray)) {
+            existedData = JSON.parse(catalog);
+            if ($.isArray(existedData) && $.isArray(booksArray)) {
                 $.each(booksArray, function (index, item) {
-                    for (i = 0; i < updatedData.length; i++) {
-                        if (updatedData[i].ISBN === item.ISBN) {
+                    for (i = 0; i < existedData.length; i++) {
+                        if (existedData[i].ISBN === item.ISBN) {
                             exists = true;
                             break;
                         }
-                        if (!exists) {
-                            updatedData.push(item);
-                        } else if (exists) {
-                            updatedData[i].Title = item.Title;
-                            updatedData[i].AmountOfPages = item.AmountOfPages;
-                            updatedData[i].Rate = item.Rate;
-                            updatedData[i].Date = item.Date;
-                            updatedData[i].Authors = item.Authors.join();
-                        }
+                    }
+                    if (!exists) {
+                        existedData.push(item);
+                    } else if (exists) {
+                        existedData[i].Title = item.Title;
+                        existedData[i].AmountOfPages = item.AmountOfPages;
+                        existedData[i].Rate = item.Rate;
+                        existedData[i].Date = item.Date;
+                        existedData[i].Authors = item.Authors;
                     }
                 });
-                localStorage[booksCatalog] = JSON.stringify(updatedData);
+                localStorage[booksCatalog] = JSON.stringify(existedData);
             }
         }
     }

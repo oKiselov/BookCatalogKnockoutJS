@@ -41,7 +41,16 @@
                     <td width="10%" data-bind="text: Id"></td>
                     <td width="40%"><input type="text" data-bind="textInput: LastName" /></td>
                     <td width="40%"><input type="text" data-bind="textInput: FirstName" /></td>
-                    <td width="5%"><button class="btn btn-success full-button">Save</button></td>
+                    <td width="5%">
+                        <div>
+                            <button class="btn btn-danger full-button" data-bind="visible: IsChanged, click: function(){ $root.saveAuthor($data); }">
+                                Save author
+                            </button>
+                            <button class="btn btn-success full-button" data-bind="visible: IsBooksCatalogModified, click: function(){ $root.saveBooks($data.BooksCatalogModified()); }">
+                                Save all
+                            </button>
+                        </div>
+                    </td>
                 </tr>
                 <tr data-bind="visible: IsExpanded">
                     <td colspan="5">

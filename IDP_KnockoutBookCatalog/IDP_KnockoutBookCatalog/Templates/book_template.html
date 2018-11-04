@@ -13,10 +13,10 @@
             <tbody data-bind="foreach: expandedAuthorBookCatalog">
                 <tr>
                     <td><input type="text" data-bind="textInput: Title"/></td>
-                    <td><input type="text" data-bind="textInput: AmountOfPages"/></td>
-                    <td><input type="text" data-bind="textInput: Rate"/></td>
-                    <td><input type="text" data-bind="textInput: Date"/></td>
-                    <td><button class="btn btn-warning" data-bind="visible: isChanged">Save</button></td>
+                    <td><input type="number" data-bind="textInput: AmountOfPages"/></td>
+                    <td><input type="number" min="0" max="5" data-bind="textInput: Rate"/></td>
+                    <td><input type="number" min="1960" max="2018" data-bind="textInput: Date"/></td>
+                    <td><button class="btn btn-warning" data-bind="visible: IsChanged, click: function(){ $root.saveBooks($data); }">Save</button></td>
                 </tr>
             </tbody>
         </table>

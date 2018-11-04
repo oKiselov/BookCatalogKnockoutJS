@@ -26,6 +26,8 @@ app.DefaultViewModel = (function (ko, db) {
             ko.utils.arrayForEach(data || [], function (item) {
 
                 var newBook = new app.Book(item.ISBN, item.Title, item.AmountOfPages, item.Rate, item.Date, item.Authors);
+                newBook.UnchangedBook = ko.toJS(newBook);
+                newBook.Title.subscribe(function (v) { newBook.trackBookChanges(); });
                 tempBooks.push(newBook);
 
                 if ($.isArray(newBook.Authors()) && $.isArray(me.authors())) {
@@ -40,6 +42,7 @@ app.DefaultViewModel = (function (ko, db) {
             });
             me.books(tempBooks);
         });
+
     }
 
     _init();

@@ -43,8 +43,7 @@
                     <td width="40%"><input type="text" data-bind="textInput: FirstName" /></td>
                     <td width="5%"><button class="btn btn-success full-button">Save</button></td>
                 </tr>
-                <!-- ko if: IsExpanded() -->
-                <tr>
+                <tr data-bind="visible: IsExpanded">
                     <td colspan="5">
                         <div>
                             <!-- ko template: {name:'expanded-authors-book-table', data: BooksCatalog, as: 'expandedAuthorBookCatalog' }-->
@@ -52,7 +51,6 @@
                         </div>
                     </td>
                 </tr>
-                <!-- /ko -->
             </tbody>
         </table>
     </div>
